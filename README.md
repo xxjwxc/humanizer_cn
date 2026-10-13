@@ -1,206 +1,206 @@
-# Humanizer
+# Humanizer-cn
 
-[![GitHub stars](https://img.shields.io/github/stars/blader/humanizer?style=flat)](https://github.com/blader/humanizer/stargazers) [![skills.sh installs](https://skills.sh/b/blader/humanizer)](https://skills.sh/blader/humanizer)
+Humanizer-cn 是 [Humanizer](https://github.com/blader/humanizer) 的中文版。它编辑中文文章、评论和文档中的空话、重复及模板化表达，让文字更像人写的，同时保留事实、确定程度和作者声音。规则来源包括 Wikipedia 的 [Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) 和 [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh) 的中文检查点。
 
-Humanizer makes AI-written text sound like a person wrote it, without changing what it says. It is built on Wikipedia's [Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), the guide Wikipedia editors use to catch AI-generated text, and it works in Claude Code, Codex, and any other agent that supports skills.
+**改写前：**
+> 新的软件更新充分彰显了团队对创新的持续追求。这不仅是一次更新，更是效率的飞跃。它新增 CSV 导出、全文搜索和批量重命名。总而言之，让我们拭目以待，期待更多可能。
 
-**Before:**
-> I'm thrilled to announce that shared drafts are finally here! 🚀 For months, our own team was drowning in files named final_v7.docx — and we knew there had to be a better way. Now two people can edit the same doc at once, with every change appearing live for both of them. It's not just a feature; it's a whole new way to collaborate. Comments stay anchored to the exact sentence they reference, even as the text around them evolves. And the best part? It's available today on every plan, completely free. Let that sink in.
+**改写后：**
+> 这次更新新增 CSV 导出、全文搜索和批量重命名。
 
-**After:**
-> Shared drafts are out today. For months our own team passed around files named final_v7.docx, so we built a way for two people to edit the same doc at once, with each person's changes showing up live for the other. Comments stay pinned to the sentence they're about, even when the text around them changes. It's free on every plan.
+这是一份由 Agent 读取执行的编辑指导，不是独立的检测程序。它不能证明文章由谁撰写，也不保证通过任何 AI 检测器。
 
-In a blind test, judges preferred Humanizer's rewrite over the original AI text 16 times out of 16 ([#229](https://github.com/blader/humanizer/issues/229)).
+## 最强的五种痕迹
 
-Humanizer edits for human readers. Getting past AI detectors is not a goal, and detectors still flag most of its output.
+以下是最常见的 AI 写作信号，命中一处即应修改：
 
-## The five strongest tells
+1. **不是 X，而是 Y：**“这不仅是一个功能，更是一种全新的协作方式。”
+2. **单句收尾与戏剧性碎片：**“让我们拭目以待。”
+3. **格言与伪深度：**“协作是效率的语言。”
+4. **起跑式铺垫：**“接下来让我们深入看看……”
+5. **与假想敌辩论：**“不要误会，我并不是说 X……”
 
-These are the most common signs of AI writing, and Humanizer rewrites any of them on sight:
+Humanizer-cn 共检查 [31 条模式](#全部-31-条模式)，其中 F 组（26–31）是专为中文补充的检查点。
 
-1. **Not X but Y:** "It's not just a feature, it's a shift."
-2. **One-line closers:** "Let that sink in."
-3. **Sayings that sound deep:** "At its core, what really matters is..."
-4. **A staged run-up:** "Here's the thing." "Honestly?"
-5. **Arguing with no one:** "I'm not saying X, but..."
+## 安装
 
-Humanizer checks for [26 patterns](#the-26-patterns) in all.
+安装后在对话中输入 `/humanizer-cn` 即可调用。
 
-## Installation
+### DeepSeek Harness（DSH）
 
-Once installed, the skill answers to `/humanizer`.
+DSH 按以下目录扫描技能文件（kebab-case 命名），优先级从高到低：
+
+- 项目级：`./.dsh/skills/` 或 `./.agents/skills/`
+- 用户级：`~/.dsh/skills/` 或 `~/.agents/skills/`
+
+把本仓库的 `.dsh/skills/humanizer-cn.md` 复制到上述任一目录即可：
+
+```bash
+# 用户级（所有项目生效）
+mkdir -p ~/.dsh/skills
+cp .dsh/skills/humanizer-cn.md ~/.dsh/skills/
+```
+
+重启 DSH 会话（`dsh web` 或 `npx @deepseek-ai/dsh web`）后，输入 `/humanizer-cn` 或直接描述需求（“帮我去掉这段文字的 AI 味”）即可触发。
 
 ### Claude Code
 
 ```text
-/plugin marketplace add blader/humanizer
-/plugin install humanizer@humanizer
+/plugin marketplace add <你的仓库地址>
+/plugin install humanizer-cn@humanizer-cn
 ```
 
-The plugin answers to `/humanizer:humanizer`. It needs Claude Code 2.1.142 or newer; on older versions, use `npx skills add blader/humanizer --global --agent claude-code`.
-
-### Codex
+也可以用 Skills CLI：
 
 ```bash
-npx skills add blader/humanizer --global --agent codex
+npx skills add <你的仓库地址> --global --agent claude-code
 ```
 
-### Claude.ai and Claude Desktop
-
-Download this repository as a ZIP (**Code → Download ZIP**) and upload it as a skill in Settings.
-
-### Other agents
+### Codex 及其他 Agent
 
 ```bash
-npx skills add blader/humanizer --global --agent '*'
+npx skills add <你的仓库地址> --global --agent '*'
 ```
 
-This installs Humanizer for every agent the Skills CLI supports, including Gemini CLI, GitHub Copilot, and Windsurf. Leave off `--global` in any command above to install it only in the current project. For an agent the Skills CLI does not know, copy `SKILL.md` into its skill folder.
+Skills CLI 不认识的 Agent，直接把 `SKILL.md` 复制到它的技能目录。
 
-## Usage
+## 使用
 
-Call the skill directly:
-
-```
-/humanizer
-
-[paste your text here]
-```
-
-Or ask in plain language:
+粘贴文本：
 
 ```
-Please humanize this text: [your text]
+请用 humanizer-cn 润色下面的文章，保留技术评论的语气：
+[原文]
 ```
 
-To rewrite a file, give Humanizer its path:
+编辑文件：
 
 ```
-Humanize the prose in docs/launch-post.md
+请用 humanizer-cn 润色 article.md 中的正文。
 ```
 
-### Match your voice
+只审阅时说明“给出建议，不修改文件”。有作者样本时可一并提供，Skill 会借鉴表达习惯，但不会把样本中的经历、数据或观点搬入原文。
 
-If you want the rewrite to sound more like you, include a sample:
+## 改写示例
 
-```
-/humanizer
+以下均为教学用输入，没有未展示的补充材料。
 
-Here's a sample of my writing for voice matching:
-[paste 2-3 paragraphs of your own writing]
+**产品介绍，缺少数据：**
 
-Now humanize this text:
-[paste AI text to humanize]
-```
-
-Humanizer follows the sample's rhythm, word choice, punctuation, and deliberate quirks, including dashes if you use them.
-
-## How it works
-
-A language model writes whatever is most likely to come next, so by default it makes the choice that fits the widest range of readers and subjects. A person chooses for one reader and one subject. Every tell Humanizer looks for is a form of that default choice: a sentence that signals importance instead of adding a fact, rhythm or formatting applied by rule, an ordinary fact dressed as a pivotal one, text left over from the chat, or a reply that re-explains what the reader already knows.
-
-> "LLMs use statistical algorithms to guess what should come next. The result tends toward the most statistically likely result that applies to the widest variety of cases."
-> Wikipedia, ["Signs of AI writing"](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)
-
-Humanizer marks every tell it finds, strongest first. It drafts a rewrite without treating the original structure as fixed, checks the draft against the patterns and the original claims, and then writes the final version. It does not make things up. A name, number, date, quote, citation, or other factual detail must come from the source or the writer, and if a sentence needs a detail that is missing, Humanizer asks instead of inventing one.
-
-When you paste text, Humanizer shows its work: the first rewrite, a short critique of anything that still sounds artificial, and the final version. Point it at a file and it changes only the prose, leaving code, data, frontmatter, and link targets alone. Personal writing keeps the writer's opinions and quirks. Technical and reference prose stays neutral and plain.
-
-## The 26 patterns
-
-The patterns are numbered by strength and frequency. The first five justify an edit on a single sighting. Patterns marked *weak alone* count only when several tells share a passage, because a careful writer may use any one of them on purpose.
-
-### A. Staging instead of stating
-
-| # | Pattern | Before | After |
-|---|---------|--------|-------|
-| 1 | **Not X but Y** | "It's not just X, it's Y", "This doesn't mean X. It means Y." | State the point directly |
-| 2 | **One-line closers and dramatic fragments** | "That is the real win." after every section; "This shows the importance of..." after an example; "No prior. No nostalgia." | Cut the closer that repeats or explains the example; merge fragments into a specific claim |
-| 3 | **Sayings that sound deep** | "At its core, what matters is...", "Symmetry is the language of trust" | Replace the saying with the specific claim |
-| 4 | **Staged run-up before the point** | "Let's dive in", "Honestly? It depends..." | Remove the run-up and state the point |
-| 5 | **Arguing with no one** | "This isn't mainly about...", "A tempting approach would be..." | Remove the unraised objection or fake option; keep any real claim |
-
-### B. Rhythm by rule
-
-| # | Pattern | Before | After |
-|---|---------|--------|-------|
-| 6 | **Forced triads** | "innovation, inspiration, and insights"; three examples plus a lesson | Use the number of items the meaning needs |
-| 7 | **Repeated sentence openings** | "She noted... She noted... She filed..." | Merge the sentences or change the subject |
-| 8 | **Dashes as the universal connector** (*weak alone*) | "institutions—not the people—yet this continues—" | Use periods, commas, colons, or parentheses; match a sample that uses dashes |
-| 9 | **Stacked qualifiers** (*weak alone*) | "could potentially possibly be argued" | Keep only qualifiers the source supports |
-| 10 | **Hyphenated pairs everywhere** (*weak alone*) | "the report is high-quality" | Keep the hyphen before the noun or where the dictionary has one |
-| 11 | **Passive voice and missing subjects** (*weak alone*) | "No configuration file needed" | Name the actor when that helps |
-
-### C. Inflation and borrowed authority
-
-| # | Pattern | Before | After |
-|---|---------|--------|-------|
-| 12 | **Overused AI words** | "delve... testament... landscape... showcasing" | Use plain words |
-| 13 | **Inflated significance** | "marking a pivotal moment", "Despite challenges... continues to thrive", "The future looks bright" | Keep the fact and drop the significance; end on the last concrete fact |
-| 14 | **Vague connection or association** | "associated with the leadership of", "in connection with" | State the relationship the source gives |
-| 15 | **Shallow -ing riders** | "symbolizing... reflecting... showcasing..." | Keep only what the source supports |
-| 16 | **Sales language** | "nestled within the breathtaking region" | State what the thing is |
-| 17 | **Borrowed authority** | "Experts believe...", "cited in NYT, BBC, FT, and The Hindu" | Name a real source and what it said, or remove the claim or list |
-| 18 | **Avoiding is, are, and has** | "serves as... features... boasts" | "is... has" |
-
-### D. Formatting by rule
-
-| # | Pattern | Before | After |
-|---|---------|--------|-------|
-| 19 | **Bold as decoration** | "**OKRs**, **KPIs**"; "**Performance:** Performance improved" | Remove the bold; turn a labeled list into prose |
-| 20 | **Decorative headings** | "Strategic Negotiations And Partnerships", "🚀 Launch Phase:", "The decision, on one screen" | Sentence case; remove emojis and arrows; name what the section holds |
-| 21 | **Curly quotation marks** (*weak alone*) | `said “the project”` | `said "the project"` |
-
-### E. Leftovers from the chat and the draft
-
-| # | Pattern | Before | After |
-|---|---------|--------|-------|
-| 22 | **Chatbot residue** | "Great question! ... I hope this helps!" | Remove the wrapper and keep the content |
-| 23 | **Knowledge-limit disclaimers and guesses** | "While details are limited in available sources, it appears..." | State what the source shows, or remove the sentence |
-| 24 | **A heading repeated in the first sentence** | "## Performance" + "Speed matters." | Let the heading do the work |
-| 25 | **Writing about the document instead of its subject** | "This function was added to replace...", "compiled from...", "The table below compares..." | Describe the subject; state a convention only when the reader cannot see it |
-
-### F. Writing for the wrong reader
-
-| # | Pattern | Before | After |
-|---|---------|--------|-------|
-| 26 | **Re-explaining what the reader knows** | A reply that walks the diagnosis and proves the plan works before the decision | Lead with the decision; leave the diagnosis and the proof for the ticket that follows |
-
-## Full example
-
-**Before (AI-sounding):**
-> I recently spent five unforgettable days in Lisbon last October, and let me tell you — this city completely stole my heart. From the moment I checked into my charming hotel perched high in the historic Alfama district, I knew I was somewhere truly special.
+> 原文：该方案稳定可靠、快速响应、易于维护。
 >
-> Yes, the famous hills are challenging — with countless stairs between my hotel and everything else, my legs certainly felt it! — but every climb rewards you with breathtaking, panoramic views that make it all worthwhile.
+> 改写：这套方案运行稳定、响应快，也方便维护。
+
+没有补写上线时间、响应速度或维护成本。原文缺少证据，可以向作者索取，不能用润色补出数据。
+
+**故障反馈，有不确定性：**
+
+> 原文：该问题被社区多次报告，被认为可能与内存泄漏有关，但原因尚未确认。
 >
-> No trip would be complete without riding the iconic Tram 28, a roughly forty-minute journey shared with plenty of fellow travelers eager to capture the magic. And the food? Simply divine. While the pastéis de nata at Pastéis de Belém are a beloved national treasure, my absolute favorite came from a hidden gem in Graça, still warm from the oven.
+> 改写：社区多次报告这个问题。它被认为可能与内存泄漏有关，但原因尚未确认。
+
+保留“可能有关”和“尚未确认”，不把推测改成因果结论。
+
+**更新说明，有真实的三项功能：**
+
+> 原文：这次更新彰显了团队对创新的追求。它新增导出、搜索和批量重命名。离线编辑计划在下一版推出，目前尚未完成测试。
 >
-> But what truly makes Lisbon special isn't just the sights — it's the feeling. Wander just a block or two above the main squares and you'll discover a quieter, more authentic side of the city, inviting you to slow down and savor every moment.
+> 改写：这次更新新增导出、搜索和批量重命名。离线编辑计划在下一版推出，目前尚未完成测试。
+
+保留三个功能，不为避开三段式删项或凑项；计划和测试状态保持原意。
+
+**已经清楚的文字：**
+
+> 原文：先保存文件，再关闭窗口。未保存的修改会丢失。
 >
-> Of course, the must-see São Jorge Castle offers stunning views over the rooftops below. The queues can be long, but the experience is absolutely worth it for any history buff or curious traveler.
->
-> Would I go back? Absolutely — next time in spring, and with better shoes! Lisbon isn't just a place to visit; it's a place to fall in love with, again and again. ✨
+> 改写：先保存文件，再关闭窗口。未保存的修改会丢失。
 
-**After:**
-> I spent five days in Lisbon last October. My hotel was up in Alfama, with a lot of stairs between it and everything else, and my legs felt every one of them. The views from the top were worth the climb.
->
-> Everyone tells you to ride Tram 28, so I did. The trip took about forty minutes, and most of the car was other tourists taking pictures out the windows. The custard tarts at Pastéis de Belém are the famous ones, but my favorite came from a place in Graça, still warm from the oven.
->
-> The part of Lisbon I liked best starts a block or two above the main squares, where the streets go quiet and nobody is in a hurry. São Jorge Castle has good views over the rooftops and a long queue to get them.
->
-> I'd go back, in spring next time, and with better shoes.
+不要求每次调用都产生修改。
 
-## Sources
+## 编辑原则
 
-- [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) is the source for the pattern list.
-- [WikiProject AI Cleanup](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_AI_Cleanup) maintains the page.
+约束优先级是：保留信息和确定程度，遵守用户范围与文体，匹配作者声音，再处理具体表达问题。模式命中不能覆盖这些要求。
 
-## Version history
+- 不编造功能、数据、来源、人物身份或第一人称经历。
+- 保留否定、条件、归因、范围、时间和完成状态；“可能”不变成“确定”，“计划”不变成“已经”。
+- 三项列表、四字格、被动句、破折号和连接词按作用判断，不机械删除。
+- 随笔可以保留个性，学术和商务文本保留正式程度；不把所有文章改成同一种口语。
+- 文件编辑默认保留代码、命令、路径、链接目标、YAML、数据、标题和锚点。改标题或结构需要检查引用。
+- 默认只交付最终稿，不要求展示中间草稿、命中清单或自评分。
 
-See [CHANGELOG.md](CHANGELOG.md).
+## 全部 31 条模式
 
-## License
+模式按 A–F 分类。这是编辑问题清单，不是作者身份检测标准。
 
-MIT
+### A. 铺垫代替陈述
 
-If Humanizer helps you, a star helps other people find it.
+| # | 模式 | 改写前 | 改写后 |
+|---|------|--------|--------|
+| 1 | **不是 X，而是 Y** | “这不仅是一个导出按钮，更是通往高效工作的全新入口” | 直接陈述事实 |
+| 2 | **单句收尾与戏剧性碎片** | “文件没了。消失了。再也找不到了。” | 合并碎片；删除不增加内容的收尾 |
+| 3 | **格言与伪深度** | “协作是效率的语言” | 回到具体判断 |
+| 4 | **起跑式铺垫** | “接下来让我们深入看看……” | 删除预告，直接说事 |
+| 5 | **与假想敌辩论** | “不要误会，我并不是在制造焦虑” | 删除没有内容的自我辩护 |
+
+### B. 公式化节奏
+
+| # | 模式 | 改写前 | 改写后 |
+|---|------|--------|--------|
+| 6 | **强凑三段式** | “带来了创新、突破和全新的可能” | 按含义需要的数量列举 |
+| 7 | **句式开头复读** | “她检查了门。她检查了锁。她记下了问题。” | 合并句子或换主语；保留有意排比 |
+| 8 | **破折号当万能连接** | “结果终于出现了——答案揭晓了——” | 滥用时换成逗号、句号或重写 |
+| 9 | **限定词堆叠** | “也许可能会减少” | 压缩重复限定，保留证据强度 |
+| 10 | **生造复合词与连接号** | “文稿-校对-发布一体化”机制 | 换成已有定义；保留固定术语 |
+| 11 | **被动与缺主语** | “这份稿件被编辑复核后，编辑将其退回” | 施事者明确时改主动 |
+
+### C. 拔高与借权威
+
+| # | 模式 | 改写前 | 改写后 |
+|---|------|--------|--------|
+| 12 | **AI 高频词** | “赋能、至关重要、深入探讨、无缝” | 空泛时换平实用词 |
+| 13 | **意义拔高** | “标志着协作新时代的到来” | 保留事实，删掉拔高 |
+| 14 | **模糊关联** | “与该乐团有着密切联系” | 写明原文已有的关系，不推断身份 |
+| 15 | **句尾补充式拔高** | “彰显了团队对创新的不懈追求” | 删除只重复赞美的尾巴 |
+| 16 | **宣传语** | “堪称咖啡爱好者的梦想天堂” | 说清它是什么 |
+| 17 | **借权威** | “一些未具名的专家认为……充分体现重大价值” | 保留归因与不确定性，不编造信源 |
+| 18 | **回避“是／有”** | “作为展览场地，设有……” | “是展览场地，有……” |
+
+### D. 公式化排版
+
+| # | 模式 | 改写前 | 改写后 |
+|---|------|--------|--------|
+| 19 | **粗体当装饰** | “支持 **CSV（逗号分隔值）** 和 **JSON** 导出” | 去掉装饰性粗体 |
+| 20 | **装饰性标题** | “🚀 发布安排：……” | 去掉表情符号与装饰 |
+| 21 | **引号与中文标点** | `他说"项目进展顺利"` | 按目标格式统一为中文标点 |
+
+### E. 聊天与草稿残留
+
+| # | 模式 | 改写前 | 改写后 |
+|---|------|--------|--------|
+| 22 | **客服腔** | “好问题！……希望这对您有帮助！” | 删除包装，保留内容 |
+| 23 | **知识边界免责与猜测填充** | “可用信息确实比较有限……” | 说明资料缺口，不把猜测写成事实 |
+| 24 | **首句复读标题** | 标题后紧接一句同义复述 | 让标题自己起作用 |
+| 25 | **谈论上一稿** | “这一段是刚补充的说明……” | 删除编辑过程叙述 |
+
+### F. 中文表达的补充检查
+
+| # | 模式 | 改写前 | 改写后 |
+|---|------|--------|--------|
+| 26 | **层叠的“的”** | “一个十亿参数的开源小模型的微调的完整方案” | 调整结构，保留修饰关系 |
+| 27 | **“进行＋动词”** | “对系统进行全面测试” | “全面测试系统” |
+| 28 | **被字句堆叠** | “被社区多次报告，被认为可能与……” | 改主动句，保持归因 |
+| 29 | **四字词排比** | “稳定可靠、快速响应、易于维护” | 空泛堆叠时改得自然 |
+| 30 | **“随着……的发展”式开头** | “在技术不断发展的时代背景下……” | 背景没有独立信息时压缩 |
+| 31 | **套话收尾** | “让我们拭目以待，期待更多可能” | 删除不提供信息的祝愿 |
+
+## 版本历史
+
+见 [CHANGELOG.md](CHANGELOG.md)。
+
+## 来源与许可
+
+- [blader/humanizer](https://github.com/blader/humanizer)：原项目。
+- [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh)：中文规则与示例的参考来源。
+- [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)：模式清单的观察来源。
+
+遵循仓库中的 [MIT License](LICENSE)。

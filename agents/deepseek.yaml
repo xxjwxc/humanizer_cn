@@ -1,0 +1,4 @@
+interface:
+  display_name: "Humanizer-cn"
+  short_description: "去除中文文本的 AI 写作痕迹，保留事实和作者声音"
+  default_prompt: "使用 $humanizer-cn 改写这段文字，保持原意和事实不变，读起来像真人写的。"

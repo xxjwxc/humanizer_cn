@@ -1,12 +1,12 @@
 {
-  "name": "humanizer",
-  "description": "Rewrite AI-sounding text so it reads like the writer without changing what it says.",
-  "version": "3.1.0",
+  "name": "humanizer-cn",
+  "description": "编辑中文文章、评论和文档中的空话、重复及模板化表达，保留事实、确定程度和作者声音。",
+  "version": "3.2.0",
   "author": {
-    "name": "blader"
+    "name": "xxjwxc"
   },
-  "homepage": "https://github.com/blader/humanizer",
-  "repository": "https://github.com/blader/humanizer",
+  "homepage": "https://github.com/xxjwxc/humanizer_cn",
+  "repository": "https://github.com/xxjwxc/humanizer_cn",
   "license": "MIT",
-  "keywords": ["writing", "editing", "humanize", "prose", "style"]
+  "keywords": ["writing", "editing", "humanize", "prose", "style", "chinese", "中文"]
 }

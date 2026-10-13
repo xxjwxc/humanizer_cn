@@ -1,18 +1,18 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
-  "name": "humanizer",
+  "name": "humanizer-cn",
   "owner": {
-    "name": "blader",
-    "url": "https://github.com/blader"
+    "name": "xxjwxc",
+    "url": "https://github.com/xxjwxc"
   },
-  "description": "Install Humanizer as a Claude plugin.",
+  "description": "Install Humanizer-cn as a Claude plugin.",
   "plugins": [
     {
-      "name": "humanizer",
+      "name": "humanizer-cn",
       "source": "./",
-      "description": "Rewrite AI-sounding text so it reads like the writer without changing what it says.",
+      "description": "编辑中文文章、评论和文档中的空话、重复及模板化表达，保留事实、确定程度和作者声音。",
       "license": "MIT",
-      "keywords": ["writing", "editing", "humanize", "prose", "style"]
+      "keywords": ["writing", "editing", "humanize", "prose", "style", "chinese", "中文"]
     }
   ]
 }
