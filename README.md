@@ -1,6 +1,6 @@
 # Humanizer-cn
 
-Humanizer-cn 是 [Humanizer](https://github.com/blader/humanizer) 的中文版。它编辑中文文章、评论和文档中的空话、重复及模板化表达，让文字更像人写的，同时保留事实、确定程度和作者声音。规则来源包括 Wikipedia 的 [Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) 和 [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh) 的中文检查点。
+Humanizer-cn 是 [Humanizer](https://github.com/blader/humanizer) 的中文版。它编辑中文文章、评论和文档中的空话、重复及模板化表达，让文字更像人写的，同时保留事实、确定程度和作者声音。规则来源包括 Wikipedia 的 [Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) 的中文检查点。
 
 **改写前：**
 > 新的软件更新充分彰显了团队对创新的持续追求。这不仅是一次更新，更是效率的飞跃。它新增 CSV 导出、全文搜索和批量重命名。总而言之，让我们拭目以待，期待更多可能。
@@ -212,7 +212,6 @@ Skills CLI 不认识的 Agent，直接把 `SKILL.md` 复制到它的技能目录
 ## 来源与许可
 
 - [blader/humanizer](https://github.com/blader/humanizer)：原项目。
-- [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh)：中文规则与示例的参考来源。
 - [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)：模式清单的观察来源。
 
 遵循仓库中的 [MIT License](LICENSE)。

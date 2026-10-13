@@ -8,7 +8,7 @@ description: |
 license: MIT
 metadata:
   version: "3.2.0"
-  source: 基于 blader/humanizer v3.1.0 与 op7418/Humanizer-zh 修订；参考 Wikipedia“Signs of AI writing”
+  source: 基于 blader/humanizer v3.1.0 修订；参考 Wikipedia“Signs of AI writing”
 ---
 
 # Humanizer-cn：去除中文文本的 AI 写作痕迹
@@ -402,6 +402,5 @@ metadata:
 ## 来源
 
 - [blader/humanizer](https://github.com/blader/humanizer)：原项目，A–E 分类、声音校准和文件模式的来源。
-- [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh)：中文分类与 F 组检查点的参考来源。
 - [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop)：简洁表达与编辑检查的参考来源。
 - [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)：原项目的观察来源，不作为作者身份判断或检测准确率的保证。
