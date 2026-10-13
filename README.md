@@ -28,6 +28,18 @@ Humanizer-cn 共检查 [31 条模式](#全部-31-条模式)，其中 F 组（26�
 
 ### DeepSeek Harness（DSH）
 
+**方式一：插件页一键安装（推荐）**
+
+仓库根已声明 `dsh.bundle` 组合包，直接在 DSH 插件安装页填仓库地址：
+
+```text
+https://github.com/xxjwxc/humanizer_cn
+```
+
+装完重启 `dsh web` 生效。激活时插件会把技能文件装入 `~/.dsh/skills/humanizer-cn.md`。
+
+**方式二：手动安装技能文件**
+
 DSH 按以下目录扫描技能文件（kebab-case 命名），优先级从高到低：
 
 - 项目级：`./.dsh/skills/` 或 `./.agents/skills/`

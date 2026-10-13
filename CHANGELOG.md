@@ -7,6 +7,7 @@
 - SKILL.md 全面中文化，基于 blader/humanizer v3.1.0 与 op7418/Humanizer-zh 修订：保留 A–E 组 25 条模式，新增 F 组中文补充检查（层叠的“的”、“进行＋动词”、被字句堆叠、四字词排比、“随着……的发展”式开头、套话收尾），共 31 条。每条给出改写前、改写后和保留边界。
 - 编辑约束按优先级排序：保留信息和确定程度 > 用户范围与文体 > 作者声音 > 具体表达问题。模式命中不能覆盖事实保真。
 - 新增 DeepSeek Harness 支持：`.dsh/skills/humanizer-cn.md` 自包含技能文件，可放入项目级 `./.dsh/skills/` 或用户级 `~/.dsh/skills/`，输入 `/humanizer-cn` 触发；`agents/deepseek.yaml` 提供 DeepSeek 兼容 Agent 的显示名与默认提示。
+- 仓库根声明 `dsh.bundle` 组合包（`package.json` + `cordis.patch.yml` + `index.js`），DSH 插件页可直接填 GitHub 仓库地址一键安装，激活时自动把技能装入 `~/.dsh/skills/`。
 - 包文件更名 humanizer-cn，插件清单、agents/openai.yaml 与 README 全部中文化；校验脚本同步支持中文标题与 DSH 技能文件检查。
 
 ## 3.1.0

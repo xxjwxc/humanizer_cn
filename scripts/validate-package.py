@@ -80,6 +80,11 @@ DSH_SKILL = ROOT / ".dsh" / "skills" / "humanizer-cn.md"
 dsh_text = read_package_file(DSH_SKILL)
 if not dsh_text.startswith('---\nname: humanizer-cn\n'):
     raise SystemExit("Keep the DeepSeek Harness skill at .dsh/skills/humanizer-cn.md with name humanizer-cn")
+PACKAGE_JSON = json.loads(read_package_file(ROOT / "package.json"))
+if PACKAGE_JSON.get("dsh", {}).get("bundle", {}).get("patch") != "./cordis.patch.yml":
+    raise SystemExit("Declare dsh.bundle.patch in package.json so DSH can install the repo as a plugin")
+if not (ROOT / "cordis.patch.yml").is_file():
+    raise SystemExit("Keep the DSH patch file cordis.patch.yml at the repo root")
 if "skills" in CURSOR_PLUGIN:
     raise SystemExit("Omit skills from the Cursor plugin so it loads the root SKILL.md")
 
