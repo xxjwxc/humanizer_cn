@@ -11,7 +11,7 @@
 
 这些表达不是语法错误，而是模型的默认选择：它总挑那种对最多读者、最多场景都成立的写法，结果就是正确的废话。GitHub 上的 [Humanizer](https://github.com/blader/humanizer) 项目把 Wikipedia 编辑们总结的 [Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) 做成了一个 Agent Skill，专门改写这类文字。但它只针对英文。
 
-所以我做了 **Humanizer-cn**：把这套思路完整搬到中文，参考 [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh) 的中文检查点，并补上了 DeepSeek Harness（DSH）插件支持。项目地址：
+所以我做了 **Humanizer-cn**：把这套思路完整搬到中文，并补上了 DeepSeek Harness（DSH）插件支持。项目地址：
 
 ```text
 https://github.com/xxjwxc/humanizer_cn
@@ -108,7 +108,7 @@ Skills CLI 不认识的 Agent，直接把 `SKILL.md` 复制到它的技能目录
 
 ## 写在最后
 
-项目基于 blader/humanizer v3.1.0 和 op7418/Humanizer-zh 修订而来，MIT 协议开源，规则清单、示例和边界条件全部公开在仓库里，改哪条、怎么改，你都可以自己定。
+项目基于 blader/humanizer v3.1.0 修订而来，MIT 协议开源，规则清单、示例和边界条件全部公开在仓库里，改哪条、怎么改，你都可以自己定。
 
 需要说明：它编辑的对象是"给读者看的文字"，目标不是骗过 AI 检测器，检测器大概率仍然会标它的输出。但读文章的是人，让人读起来舒服，才是正经事。
 
