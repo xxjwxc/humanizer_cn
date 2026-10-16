@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "humanizer-cn",
   "description": "编辑中文文章、评论和文档中的空话、重复及模板化表达，保留事实、确定程度和作者声音。",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "author": {
     "name": "xxjwxc",
     "url": "https://github.com/xxjwxc"

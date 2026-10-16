@@ -45,14 +45,43 @@ yaml_metadata = require_match(
     "SKILL.md must begin with YAML metadata",
 ).group(1)
 
-for unsupported_field in ("version:", "compatibility:", "allowed-tools:"):
+for unsupported_field in ("compatibility:", "allowed-tools:"):
     if re.search(rf"(?m)^{re.escape(unsupported_field)}", yaml_metadata):
         raise SystemExit(f"Remove unsupported YAML field: {unsupported_field[:-1]}")
 
+# WorkBuddy reads these fields when a user uploads the skill to its marketplace.
+for missing_field in (
+    "version:",
+    "display_name:",
+    "display_name_zh:",
+    "display_name_en:",
+    "description_zh:",
+    "description_en:",
+):
+    if not re.search(rf"(?m)^{re.escape(missing_field)}", yaml_metadata):
+        raise SystemExit(f"Add {missing_field[:-1]} to the SKILL.md frontmatter")
+
+display_name = require_match(
+    re.search(r'(?m)^display_name:\s*"?(.+?)"?\s*$', yaml_metadata),
+    "Add a Chinese display name to SKILL.md",
+).group(1)
+display_name_zh = require_match(
+    re.search(r'(?m)^display_name_zh:\s*"?(.+?)"?\s*$', yaml_metadata),
+    "Add display_name_zh to SKILL.md",
+).group(1)
+if display_name != display_name_zh:
+    raise SystemExit("Give display_name and display_name_zh the same value")
+
+marketplace_version = require_match(
+    re.search(r'(?m)^version:\s*["\']?([0-9]+\.[0-9]+\.[0-9]+)["\']?\s*$', yaml_metadata),
+    "Add a top-level version to SKILL.md as a three-part version",
+).group(1)
 skill_version = require_match(
     re.search(r'(?m)^\s+version:\s*["\']?([0-9]+\.[0-9]+\.[0-9]+)["\']?\s*$', yaml_metadata),
     "Add metadata.version to SKILL.md as a three-part version",
 ).group(1)
+if marketplace_version != skill_version:
+    raise SystemExit("Give the top-level version and metadata.version the same value")
 changelog_version = require_match(
     re.search(r"(?m)^## ([0-9]+\.[0-9]+\.[0-9]+)$", CHANGELOG),
     "Add a version heading to CHANGELOG.md",

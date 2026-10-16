@@ -1,6 +1,6 @@
 {
   "name": "dsh-humanizer-cn",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "编辑中文文章、评论和文档中的空话、重复及模板化表达，保留事实、确定程度和作者声音。",
   "type": "module",
   "main": "index.js",

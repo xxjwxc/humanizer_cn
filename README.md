@@ -55,6 +55,10 @@ cp .dsh/skills/humanizer-cn.md ~/.dsh/skills/
 
 重启 DSH 会话（`dsh web` 或 `npx @deepseek-ai/dsh web`）后，输入 `/humanizer-cn` 或直接描述需求（“帮我去掉这段文字的 AI 味”）即可触发。
 
+### WorkBuddy（腾讯）
+
+`SKILL.md` 的 frontmatter 已包含 WorkBuddy 技能市场要求的 `version`、`display_name_zh`、`display_name_en`、`description_zh`、`description_en` 字段。在 WorkBuddy 的技能上传页选择仓库根目录即可导入，导入后输入 `/humanizer-cn` 调用。
+
 ### Claude Code
 
 ```text

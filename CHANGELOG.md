@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.2.1
+
+- 补齐 WorkBuddy 技能市场要求的 SKILL.md frontmatter 字段：`version`、`display_name` 与 `display_name_zh`（同为「中文去 AI 味」）、`display_name_en`（Humanizer CN）、`description_zh`、`description_en`。原有中文 `description` 保持不变。
+- 同时写 `display_name` 和 `display_name_zh`：`display_name` 是服务端导入时读取的键，`display_name_zh` 是 WorkBuddy 界面中文展示的键。
+- `version` 现在写在 frontmatter 顶层，`metadata.version` 保留同样取值，兼顾 Agent Skills 与各平台读取习惯。
+- 校验脚本新增三项检查：六个市场字段必须存在；顶层 `version` 与 `metadata.version` 必须一致；`display_name` 与 `display_name_zh` 必须一致。
+
 ## 3.2.0
 
 中文版重构（Humanizer-cn）。

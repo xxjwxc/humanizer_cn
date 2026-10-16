@@ -1,13 +1,30 @@
 ---
 name: humanizer-cn
+version: "3.2.1"
+display_name: 中文去 AI 味
+display_name_zh: 中文去 AI 味
+display_name_en: Humanizer CN
 description: |
   编辑中文文章、评论和文档中的空话、重复及模板化表达，保留事实、确定程度和作者声音。
   适用于润色已有中文文本：假对比、单句收尾、起跑式铺垫、强凑三段式、破折号泛滥、
   意义拔高、宣传语、AI 高频词、无效粗体、客服腔、被字句堆叠、四字词排比等。
   不用于判断作者身份，也不保证通过任何 AI 检测器。
+description_zh: |
+  编辑中文文章、评论和文档中的空话、重复及模板化表达，保留事实、确定程度和作者声音。
+  适用于润色已有中文文本：假对比、单句收尾、起跑式铺垫、强凑三段式、破折号泛滥、
+  意义拔高、宣传语、AI 高频词、无效粗体、客服腔、被字句堆叠、四字词排比等。
+  不用于判断作者身份，也不保证通过任何 AI 检测器。
+description_en: |
+  Edit Chinese articles, comments, and documents to remove filler, repetition, and
+  templated phrasing while keeping facts, hedging, and the author's voice intact.
+  Use for polishing existing Chinese text: false contrasts, summary-line endings,
+  run-up intros, forced triads, dash overuse, manufactured significance, promotional
+  language, AI vocabulary, empty boldface, service-desk tone, stacked passive voice,
+  and four-character parallelism. Not for deciding authorship, and no guarantee of
+  passing an AI detector.
 license: MIT
 metadata:
-  version: "3.2.0"
+  version: "3.2.1"
   source: 基于 blader/humanizer v3.1.0 修订；参考 Wikipedia“Signs of AI writing”
 ---
 
